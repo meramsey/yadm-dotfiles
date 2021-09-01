@@ -1,0 +1,87 @@
+# Inserts a blank line between shell prompts
+#add_newline = true
+
+[line_break]
+#disabled = true
+
+# Replace the "❯" symbol in the prompt with "@"
+[character]                            # The name of the module we are configuring is "character"
+success_symbol = "[@](bold green)"
+error_symbol = "[@](bold red)"
+
+
+# # Disable the package module, hiding it from the prompt completely
+[package]
+disabled = true
+
+[git_status]
+conflicted = "🏳"
+ahead = "⇡${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+behind = "⇣${count}"
+untracked = "🤷‍"
+stashed = "📦"
+modified = "📝"
+staged = '[++\($count\)](green)'
+renamed = "👅"
+deleted = "🗑"
+
+
+
+scan_timeout       = 10 # wait 10ms for Starship to CWD files
+
+[username]
+format             = "[ $user](bold fg:231 bg:236)[@](fg:245 bg:236)"
+style_user         = "white bold"
+style_root         = "yellow bold"
+show_always        = true
+disabled           = false
+
+[hostname]
+format             = "[$hostname](fg:241 bg:236)"
+ssh_only           = false
+trim_at            = "."
+disabled           = false
+
+
+# IMPORTANT: There's a bug somewhere in these Git parts.
+#            The closing '' symbol doesn't appear on the end if there's no changes to the repo.
+[git_branch]
+format             = "[━](fg:241)[](fg:236)[$branch $symbol]($style)"
+style              = "fg:231 bg:236"
+symbol             = ""
+truncation_length  = "32"
+truncation_symbol  = "…"
+always_show_remote = true # ?
+only_attached      = false # ?
+disabled           = false
+
+[git_commit]
+format             = "[ $hash]($style)" # [\\($tag\\)]($style)"
+style              = "fg:241 bg:236"
+commit_has_length  = 64
+tag_symbol         = "🏷 "
+tag_disabled       = false
+only_detached      = false
+disabled           = true
+
+[git_state]
+format             = '\([$state($progress_current/$progress_total)]($style)\)'
+rebase             = "REBASING"
+merge              = "MERGING"
+revert             = "REVERTING"
+cherry_pick        = "CHERRY-PICKING"
+bisect             = "BISECTING"
+am                 = "AM"
+am_or_rebase       = "AM/REBASE"
+style              = "bold yellow bg:236"
+disabled           = false
+
+
+
+[time]
+disabled = false
+format = '🕙[\[ $time \]]($style) '
+time_format = "%T"
+utc_time_offset = "-5"
+time_range = "10:00:00-14:00:00"
