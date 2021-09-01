@@ -1,0 +1,34 @@
+# Use Ctrl-b like tmux
+escape ^Bb
+
+# Turn off start message
+startup_message off
+
+# Use the same $SHELL
+shell -${SHELL}
+
+# Setup scrollback buffer
+defscrollback 5000
+
+# Automatically detach on hangup
+autodetach on
+
+# Full screen apps like Vim clear on exit
+altscreen on
+
+# Window messages color
+sorendition "= kY"
+
+# Set a 256 color terminal
+term        xterm-256color
+termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+
+# Clear background colors properly
+# (allows swapping background in Vim to work properly)
+defbce on
+
+# Allow scrolling with the mouse (2019-10-10: doesn't work)
+# termcapinfo xterm* ti@:te@
+
+# Enable status-line always, and make it consise and pretty with Solarized
+hardstatus alwayslastline "%{= kY}screen: %?%-Lw%?%{.r}%n*%f %t%?(%u)%?%{.Y}%?%+Lw %=%{.m}@%H %{.y}[%D %M %d %Y %c]"

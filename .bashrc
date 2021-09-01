@@ -1,12 +1,14 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
-# for examples
+#!/usr/bin/env bash
 
 # If not running interactively, don't do anything
 case $- in
     *i*) ;;
       *) return;;
 esac
+
+# ~/.bashrc: executed by bash(1) for non-login shells.
+# see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
+# for examples
 
 # don't put duplicate lines or lines starting with space in the history.
 # See bash(1) for more options

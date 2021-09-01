@@ -123,7 +123,7 @@ aliases['....'] = 'cd ../..'
 aliases['yarupgrade'] = 'sudo apt-get update -y && sudo apt-get upgrade -y'
 
 #aliases['a2vpn'] = "nmcli conn up a2vpn-linux-config"
-aliases['a2vpn'] = "screen -dmS a2_vpn bash -c 'sudo openvpn --config ~/Desktop/A2_VPN/a2vpn-linux-config-new.ovpn; exec sh'"
+aliases['a2vpn'] = "screen -dmS a2_vpn bash -c 'sudo openvpn --config ~/Desktop/vpn-linux-config-new.ovpn; exec sh'"
 aliases['a2vpnkill'] = "nmcli conn down a2vpn-linux-config"
 
 

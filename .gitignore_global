@@ -1,0 +1,38 @@
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+*.code-workspace
+
+# Local History for Visual Studio Code
+.history/
+
+
+# OS X
+.DS_Store
+# Icon?
+._*
+*~
+.Spotlight-V100
+.Trashes
+
+# svn
+/.svn/*
+*/.svn/*
+
+# vim
+*.swp
+.*.sw[a-z]
+
+# ctags
+tags
+TAGS
+.tags
+
+# Rbenv
+.rbenv-version
+.ruby-version
+
+# Ruby
+.byebug_history

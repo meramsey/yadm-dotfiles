@@ -1,0 +1,103 @@
+[user]
+	name       = Michael Ramsey
+	email      = mike@hackerdise.me
+	signingkey = 5EE62F86CAA05B51
+
+[color]
+	ui = auto
+
+[color "status"]
+	header    = yellow bold
+	added     = green bold
+	updated   = green reverse
+	changed   = magenta bold
+	untracked = red
+
+[color "diff"]
+	meta       = yellow bold
+	frag       = magenta bold
+	old        = red bold
+	new        = green bold
+	whitespace = red reverse
+
+[branch]
+	sort = -authordate
+
+[push]
+	default = current
+
+[fetch]
+	prune = true
+
+[merge]
+	ff = only
+	tool = fugitive
+
+[pull]
+	rebase = true
+
+[commit]
+	cleanup = scissors
+	gpgsign = true
+
+[core]
+	whitespace   = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	excludesfile = ~/.gitignore_global
+
+[format]
+	pretty = format:%C(red)%h%Creset%C(yellow)%d%Creset %C(magenta)%an%Creset: %s %C(green)(%ar)%Creset
+
+[alias]
+	amend            = !git commit --amend --date=\"$(date)\" -C HEAD
+	branch-name      = rev-parse --abbrev-ref HEAD
+	copy-last-sha    = !git last-sha | tr -d '\n' | pbcopy
+	full-log         = log --format=fuller
+	last-sha         = rev-parse --short HEAD
+	lg               = log --graph --abbrev-commit --date=relative
+	man              = help --man
+	msg              = commit --allow-empty -m
+	pa               = add --patch
+	pending          = !git --no-pager log @{u}.. && echo
+	undo             = reset --soft HEAD^
+	unstage          = reset HEAD -- ...
+	web              = instaweb --httpd=webrick -b open
+	prune-branches   = !git branch --merged | grep -v '^master$' | grep -v "\\\\*" | xargs -n 1 git branch -d
+	fetch-pr         = "!f() { git fetch origin refs/pull/$1/head:pr/$1; } ; f"
+	recent-branches  = for-each-ref --count=10 --sort=-committerdate --format=\"%(refname:short)\" refs/heads/
+	fixup            = "!f() { git commit $* --fixup HEAD; }; f"
+	pulls            = browse -- pulls
+	root             = rev-parse --show-toplevel
+	strip-whitepsace = !git ls-files | xargs perl -i -pe 's/[\\t ]+$//g'
+	showf            = show --format=fuller
+	prq              = pull-request --push --copy --browse
+	todo             = grep -wniI -e TODO -e FIXME
+	last-committer   = !git --no-pager log --pretty="%an" --no-merges -1
+	last-subject     = !git --no-pager log --pretty="%s" -1
+	show-files       = !git --no-pager show --name-only --format=
+
+[advice]
+	statusHints        = false
+	pushNonFastForward = false
+
+[rebase]
+	autosquash = true
+	autostash  = true
+
+[stash]
+	showStat  = true
+	showPatch = true
+
+[status]
+	short = true
+	branch = true
+
+[include]
+	path = ~/.gitconfig.local
+
+[init]
+	defaultBranch = master
+
+[mergetool "fugitive"]
+	cmd = vim -f -c \"Gdiff\" \"$MERGED\"
+
+; vim:ft=gitconfig
