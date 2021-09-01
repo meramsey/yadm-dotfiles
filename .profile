@@ -22,8 +22,23 @@ if [ -d "$HOME/bin" ] ; then
 fi
 
 # set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/local/bin" ] ; then
+    PATH="$HOME/local/bin:$PATH"
+fi
+
+# set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
-export PATH="$HOME/.poetry/bin:$PATH"
+# set PATH so it includes poetry bin if it exists
+if [ -d "$HOME/.poetry/bin" ] ; then
+    export PATH="$HOME/.poetry/bin:$PATH"
+fi
+
+# set PATH so it includes cargo bin if it exists
+if [ -d "$HOME/.cargo/bin" ] ; then
+    export PATH="$HOME/.cargo/bin:$PATH"
+fi
+
+

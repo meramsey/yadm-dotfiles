@@ -118,6 +118,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-alias composer="php -d allow_url_fopen=On ${HOME}/.local/bin/composer"
 
 export MANPATH="$HOME/.local/share/man"
+
