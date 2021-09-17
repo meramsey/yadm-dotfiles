@@ -12,8 +12,24 @@ $MANPATH = f'{$HOME}/.local/share/man'
 
 # Pyenv setup by adding installation to path
 $PYENV_ROOT = f'{$HOME}/.pyenv'
-$PATH = [f'{$PYENV_ROOT}/bin'] + $PATH
 $PYENV = $(which pyenv).strip()
+$VIRTUALENV_HOME = $HOME +'/.pyenv/versions'
+
+# Setup local paths for prepending to path by default
+import os.path
+from os import path
+$user_bins = [
+f'{$HOME}/.cargo/bin',
+f'{$HOME}/.pyenv/bin',
+f'{$HOME}/.poetry/bin',
+f'{$HOME}/bin',
+f'{$HOME}/local/bin',
+f'{$HOME}/.local/bin', 
+]
+
+for dir in $user_bins:
+	if path.isdir(dir) and path.exists(dir):
+	    $PATH.add(dir,front=True, replace=True)
 
 
 # Setup vox autovox to auto activate  for .venv folders
