@@ -27,6 +27,7 @@ PACKAGE_LIST=(
   nano
   neofetch
   neovim
+  network-manager-openvpn
   network-manager-openvpn-gnome
   openjdk-11-jre
   python3
