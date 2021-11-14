@@ -7,6 +7,7 @@ PACKAGE_LIST=(
   build-essential
   dialog
   discord
+  dconf-tools
   fzf
   git
   gcc
