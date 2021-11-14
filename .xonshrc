@@ -7,7 +7,6 @@
 # $PATH = [f'{$APPDIR}/usr/bin'] + $PATH
 
 
-$PATH = [f'{$HOME}/.local/bin'] + $PATH
 $MANPATH = f'{$HOME}/.local/share/man'
 
 # Pyenv setup by adding installation to path
@@ -15,16 +14,27 @@ $PYENV_ROOT = f'{$HOME}/.pyenv'
 $PYENV = $(which pyenv).strip()
 $VIRTUALENV_HOME = $HOME +'/.pyenv/versions'
 
+# NVM install and setup
+# https://github.com/nvm-sh/nvm#install--update-script
+$NVM_DIR = f'{$HOME}/.nvm'
+aliases['nvm'] = f'{$NVM_DIR}/nvm.sh'
+#source-zsh $(f'{$NVM_DIR}/nvm.sh')
+
+# May need to adjust your path to version here to what version your using. the source nvm script does not play well with xonsh :(
+aliases['node'] = f'{$NVM_DIR}/versions/node/v12.22.1/bin/node'
+aliases['npm'] = f'{$NVM_DIR}/versions/node/v12.22.1/bin/npm'
+
 # Setup local paths for prepending to path by default
 import os.path
 from os import path
 $user_bins = [
 f'{$HOME}/.cargo/bin',
+f'{$HOME}/.config/composer/vendor/bin',
 f'{$HOME}/.pyenv/bin',
 f'{$HOME}/.poetry/bin',
 f'{$HOME}/bin',
 f'{$HOME}/local/bin',
-f'{$HOME}/.local/bin', 
+f'{$HOME}/.local/bin',
 ]
 
 for dir in $user_bins:
@@ -82,7 +92,8 @@ xontrib load ergopack
 # XONSH WEBCONFIG START
 #$PROMPT = '{env_name}{BOLD_GREEN}{user}@{hostname}{BOLD_BLUE}:{cwd} {branch_color}{gitstatus: {}}{RESET} {localtime}{BOLD_BLUE}{prompt_end}{RESET} '
 $XONSH_COLOR_STYLE = 'solarized-dark'
-xontrib load coreutils distributed output_search docker_tabcomplete autovox # avox_poetry
+# xontrib load coreutils distributed output_search docker_tabcomplete autovox # avox_poetry
+xontrib load coreutils distributed output_search docker_tabcomplete autovox avox_poetry pyenv
 # XONSH WEBCONFIG END
 
 # XONSH fzf START
@@ -127,20 +138,21 @@ $HISTCONTROL='ignoredups,erasedups'
 # Remove front dot in multiline input to make the code copy-pastable.
 $MULTILINE_PROMPT=' '
 
-$PATH = [f'{$HOME}/.cargo/bin'] + $PATH
+# $PATH = [f'{$HOME}/.cargo/bin'] + $PATH
 #  cargo install exa
 aliases['ls'] = 'exa '
+aliases['lsl'] = 'exa -lh'
 
 # cd-ing shortcuts.
 aliases['-'] = 'cd -'
 aliases['..'] = 'cd ..'
 aliases['....'] = 'cd ../..'
 
-aliases['yarupgrade'] = 'sudo apt-get update -y && sudo apt-get upgrade -y'
-
-#aliases['a2vpn'] = "nmcli conn up a2vpn-linux-config"
-aliases['a2vpn'] = "screen -dmS a2_vpn bash -c 'sudo openvpn --config ~/Desktop/vpn-linux-config-new.ovpn; exec sh'"
-aliases['a2vpnkill'] = "nmcli conn down a2vpn-linux-config"
+aliases['yarupgrade'] = 'sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y'
+# aliases['yaraptgrade'] = 'sudo apt update -y && sudo apt upgrade -y'
+#aliases['workvpn'] = "nmcli conn up workvpn-linux-config"
+aliases['workvpn'] = "screen -dmS workvpn_vpn bash -c 'sudo openvpn --config ~/Desktop/VPN/workvpn-linux-config-new.ovpn; exec sh'"
+aliases['workvpnkill'] = "nmcli conn down workvpn-linux-config"
 
 
 $LS_COLORS='rs=0:di=01;36:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:'
@@ -199,7 +211,9 @@ if ON_LINUX:
 
 
     # List all files: sorted, with colors, directories will be first (Midnight Commander style).
-    aliases['ll'] = lambda args: $[$LC_COLLATE='C' ls --group-directories-first -lAh --color @(args)]
+    # aliases['ll'] = lambda args: $[$LC_COLLATE='C' ls --group-directories-first -lAh --color @(args)]
+    # exa override
+    aliases['ll'] = 'exa -lh'
 
     # Make directory and cd into it.
     # Example: md /tmp/my/awesome/dir/will/be/here
@@ -247,7 +261,7 @@ if ON_LINUX:
         'readable-traceback',   # Make traceback easier to see for xonsh. URL: https://github.com/6syun9/xontrib-readable-traceback
         'sh',                   # Paste and run commands from bash, zsh, fish, tcsh in xonsh shell. URL: https://github.com/anki-code/xontrib-sh
         #'xo',                  # Adds an ‘xo’ alias to run the exofrills text editor in the current Python interpreter session. URL: https://github.com/scopatz/xo
-        #'xlsd',                     # xontrib-xlsd is the next gen ls command for xonsh shell, inspired by lsd. URL: https://github.com/cafehaine/xontrib-xlsd
+        #'xlsd',                # xontrib-xlsd is the next gen ls command for xonsh shell, inspired by lsd. URL: https://github.com/cafehaine/xontrib-xlsd
         'z',                    # Tracks your most used directories, based on ‘frequency’. URL: https://github.com/AstraLuma/xontrib-z
         'zoxide',               # Zoxide integration for xonsh. URL: https://github.com/dyuri/xontrib-zoxide
     ]
@@ -273,4 +287,12 @@ execx($(zoxide init xonsh), 'exec', __xonsh__.ctx, filename='zoxide')
 # XONSH zoxide END
 
 # Uncomment the below if running from appimage and need python/pip on your path from AppImage
-$PATH = [f'{$APPDIR}/usr/bin'] + $PATH
+# $PATH = [f'{$APPDIR}/usr/bin'] + $PATH
+
+# Clean out duplicate paths and maintain order.
+# https://github.com/xonsh/xonsh/issues/2562#issuecomment-357891119
+# from collections import OrderedDict
+# $PATH = list(OrderedDict.fromkeys($PATH))
+
+# execx($(starship init xonsh))
+# execx($(/usr/local/bin/starship init xonsh --print-full-init))
