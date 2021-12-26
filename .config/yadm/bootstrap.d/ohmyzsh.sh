@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
 # https://www.gitmemory.com/issue/romkatv/powerlevel10k/1279/787483286
-echo ######################
-echo # Installing OhMyZSH #
-echo ######################
+echo "######################"
+echo "# Installing OhMyZSH #"
+echo "######################"
 
 # Oh-my-ZSH
 sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" --unattended
@@ -18,3 +18,5 @@ sudo usermod --shell zsh "${USER}"
 
 # activate
 exec zsh
+echo "# Installing OhMyZSH completed"
+echo "######################"

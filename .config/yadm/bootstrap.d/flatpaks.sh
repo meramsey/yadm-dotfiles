@@ -18,9 +18,9 @@ FLATPAK_LIST=(
   org.xonotic.Xonotic
 )
 
-echo #######################
-echo # Installing Flatpaks #
-echo #######################
+echo "#######################"
+echo "# Installing Flatpaks #"
+echo "#######################"
 
 for flatpak_name in ${FLATPAK_LIST[@]}; do
 	if ! flatpak list | grep -q "$flatpak_name"; then
@@ -29,3 +29,5 @@ for flatpak_name in ${FLATPAK_LIST[@]}; do
 		echo "$flatpak_name already installed"
 	fi
 done
+echo "# Installing Flatpaks completed"
+echo "#######################"

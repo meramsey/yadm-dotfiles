@@ -2,7 +2,6 @@
 
 PACKAGE_LIST=(
   atop
-  cargo
   curl
   build-essential
   dialog
@@ -27,9 +26,9 @@ PACKAGE_LIST=(
   nano
   neofetch
   neovim
-  network-manager-openvpn
   network-manager-openvpn-gnome
   openjdk-11-jre
+  pssh
   python3
   python3-pip
   screen
@@ -37,7 +36,7 @@ PACKAGE_LIST=(
   steam
   system76-keyboard-configurator
   tilix
-  tcl-dev 
+  tcl-dev
   tk 
   tk-dev
   vim
@@ -52,9 +51,9 @@ PACKAGE_LIST=(
   zsh
 )
 
-echo #######################
-echo # Installing Packages #
-echo #######################
+echo "#######################"
+echo "# Installing Packages #"
+echo "#######################"
 
 # iterate through package and installs them
 for package_name in ${PACKAGE_LIST[@]}; do
@@ -67,3 +66,5 @@ for package_name in ${PACKAGE_LIST[@]}; do
     echo "$package_name already installed"
   fi
 done
+echo "# Installing Packages completed for apt-packages.sh #"
+echo "#######################"

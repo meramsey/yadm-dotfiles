@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
-
+echo "######################"
+echo "# Install PHP needed for CSFixer and PHPStorm #"
+echo "######################"
 # https://gist.github.com/meramsey/3dc54492750e689c678bb4e9a11b0786
 # Install PHP needed for CSFixer and PHPStorm
 sudo add-apt-repository ppa:ondrej/php
@@ -16,3 +18,5 @@ chmod a+x ~/.php-cs-fixer.php ;
 sudo mkdir -p /usr/local/src/cs-fixer/config/
 sudo cp ~/php-cs-fixer /usr/local/bin/php-cs-fixer
 sudo cp .php-cs-fixer.php /usr/local/src/cs-fixer/config/.php-cs-fixer.php
+echo "# Install PHP needed for CSFixer and PHPStorm completed"
+echo "######################"

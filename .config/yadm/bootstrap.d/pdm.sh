@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
-
-# pdm
+echo "######################"
+echo "# Installing pdm #"
+echo "######################"
+# 
 # https://pdm.fming.dev/
 # https://github.com/pawamoy/copier-pdm
 # https://github.com/pdm-project/pdm
@@ -15,3 +17,5 @@ echo 'pdm completion zsh > ~/.zfunc/_pdm'
 echo 'Once ZSH is installed you should do the below'
 echo 'mkdir $ZSH_CUSTOM/plugins/pdm'
 echo 'pdm completion zsh > $ZSH_CUSTOM/plugins/pdm/_pdm'
+echo "# Installing pdm completed"
+echo "######################"
