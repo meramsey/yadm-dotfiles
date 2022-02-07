@@ -128,6 +128,18 @@ if [ -d "$HOME/.pyenv" ] ; then
     eval "$(pyenv virtualenv-init -)"
 fi
 
+# set PATH so it includes .pyprojectx if it exists
+if [ -d "$HOME/.pyprojectx" ] ; then
+    export PYENV_ROOT="$HOME/.pyenv"
+    export PATH="$HOME/.pyprojectx:$PATH"
+fi
 
 
+eval "$(starship init bash)"
+. "$HOME/.cargo/env"
 
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+alias yubikeyrestart='gpg-connect-agent killagent /bye && gpg-connect-agent "scd serialno" "learn --force" /bye && gpg --card-status'

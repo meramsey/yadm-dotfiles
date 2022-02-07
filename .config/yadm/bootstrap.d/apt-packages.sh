@@ -29,10 +29,12 @@ PACKAGE_LIST=(
   network-manager-openvpn-gnome
   openjdk-11-jre
   pssh
+  pwgen
   python3
   python3-pip
   screen
   solaar
+  sshfs
   steam
   system76-keyboard-configurator
   tilix

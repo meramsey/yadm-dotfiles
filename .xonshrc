@@ -28,6 +28,7 @@ aliases['npm'] = f'{$NVM_DIR}/versions/node/v12.22.1/bin/npm'
 import os.path
 from os import path
 $user_bins = [
+f'{$HOME}/.pyprojectx',
 f'{$HOME}/.cargo/bin',
 f'{$HOME}/.config/composer/vendor/bin',
 f'{$HOME}/.pyenv/bin',
@@ -148,7 +149,7 @@ aliases['-'] = 'cd -'
 aliases['..'] = 'cd ..'
 aliases['....'] = 'cd ../..'
 
-aliases['yarupgrade'] = 'sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y'
+aliases['yarupgrade'] = 'sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y && flatpak update -y'
 # aliases['yaraptgrade'] = 'sudo apt update -y && sudo apt upgrade -y'
 #aliases['workvpn'] = "nmcli conn up workvpn-linux-config"
 aliases['workvpn'] = "screen -dmS workvpn_vpn bash -c 'sudo openvpn --config ~/Desktop/VPN/workvpn-linux-config-new.ovpn; exec sh'"
@@ -233,7 +234,7 @@ if ON_LINUX:
     aliases['genpass'] = '$pssWrd=$(bashword -s -l 15); echo $pssWrd; echo $pssWrd | clp'
 
     # SSH: Suppress "Connection close" message.
-    aliases['ssh'] = 'ssh -o LogLevel=QUIET'
+    # aliases['ssh'] = 'ssh -o LogLevel=QUIET'
 
     # Run http server in the current directory.
     aliases['http-here'] = 'python3 -m http.server'

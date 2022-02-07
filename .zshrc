@@ -150,3 +150,10 @@ alias yarupgrade='sudo apt-get update -y && sudo apt-get upgrade -y'
 
 # GPG Yubikey restart relearn when switching keys and stubbed.
 alias yubikeyrestart='gpg-connect-agent killagent /bye && gpg-connect-agent "scd serialno" "learn --force" /bye && gpg --card-status'
+
+#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
+export SDKMAN_DIR="$HOME/.sdkman"
+[[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# set PATH so it includes .pyprojectx
+export PATH=$PATH:/home/mike/.pyprojectx
