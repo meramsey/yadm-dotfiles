@@ -1,3 +1,10 @@
 .ssh/*
-.gnupg/*.gpg
+.gnupg/*
 .config/keybase/*
+.config/glab-cli/*
+.config/pypoetry/auth.toml
+.config/pypoetry/config.toml
+.pypirc
+.sentryclirc
+.slack.cfg
+.git-credentials
