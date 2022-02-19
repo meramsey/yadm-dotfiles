@@ -146,7 +146,7 @@ alias grr="git remote remove origin"
 alias gra="git remote add origin "
 alias clonerepo="git fetch --all && git pull --all && git clone-branches"
 
-alias yarupgrade='sudo apt-get update -y && sudo apt-get upgrade -y'
+alias yarupgrade='sudo apt-get update -y && sudo apt-get upgrade -y && sudo apt update -y && sudo apt upgrade -y && sudo apt autoremove -y && flatpak update -y'
 
 # GPG Yubikey restart relearn when switching keys and stubbed.
 alias yubikeyrestart='gpg-connect-agent killagent /bye && gpg-connect-agent "scd serialno" "learn --force" /bye && gpg --card-status'
@@ -156,4 +156,31 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # set PATH so it includes .pyprojectx
-export PATH=$PATH:/home/mike/.pyprojectx
+export PATH=$PATH:$HOME/.pyprojectx
+
+#### Begin NVM bash support
+source ~/.nvm/nvm.sh
+
+# https://github.com/nvm-sh/nvm#zsh
+# place this after nvm initialization!
+autoload -U add-zsh-hook
+load-nvmrc() {
+  local node_version="$(nvm version)"
+  local nvmrc_path="$(nvm_find_nvmrc)"
+
+  if [ -n "$nvmrc_path" ]; then
+    local nvmrc_node_version=$(nvm version "$(cat "${nvmrc_path}")")
+
+    if [ "$nvmrc_node_version" = "N/A" ]; then
+      nvm install
+    elif [ "$nvmrc_node_version" != "$node_version" ]; then
+      nvm use
+    fi
+  elif [ "$node_version" != "$(nvm version default)" ]; then
+    echo "Reverting to nvm default version"
+    nvm use default
+  fi
+}
+add-zsh-hook chpwd load-nvmrc
+load-nvmrc
+#### END NVM bash support

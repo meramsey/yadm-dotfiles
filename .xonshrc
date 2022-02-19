@@ -17,12 +17,14 @@ $VIRTUALENV_HOME = $HOME +'/.pyenv/versions'
 # NVM install and setup
 # https://github.com/nvm-sh/nvm#install--update-script
 $NVM_DIR = f'{$HOME}/.nvm'
-aliases['nvm'] = f'{$NVM_DIR}/nvm.sh'
-#source-zsh $(f'{$NVM_DIR}/nvm.sh')
+# alias is only way to run nvm normally from inside xonsh without weird issues: https://github.com/nvm-sh/nvm/issues/2748 and https://github.com/anki-code/xontrib-sh/issues/6
+aliases['nvm'] = """bash -c @(f'[ -s "{$HOME}/.nvm/nvm.sh" ] && . "{$HOME}/.nvm/nvm.sh" && nvm {" ".join($args)}')"""
+$NVM_NODE_VERSION = 'v14.19.0'
+$NVM_BIN = f'{$NVM_DIR}/versions/node/{$NVM_NODE_VERSION}/bin/'
+aliases['node'] = f'{$NVM_DIR}/versions/node/{$NVM_NODE_VERSION}/bin/node'
+aliases['npm'] = f'{$NVM_DIR}/versions/node/{$NVM_NODE_VERSION}/bin/npm'
+aliases['npx'] = f'{$NVM_DIR}/versions/node/{$NVM_NODE_VERSION}/bin/npx'
 
-# May need to adjust your path to version here to what version your using. the source nvm script does not play well with xonsh :(
-aliases['node'] = f'{$NVM_DIR}/versions/node/v12.22.1/bin/node'
-aliases['npm'] = f'{$NVM_DIR}/versions/node/v12.22.1/bin/npm'
 
 # Setup local paths for prepending to path by default
 import os.path
@@ -36,6 +38,7 @@ f'{$HOME}/.poetry/bin',
 f'{$HOME}/bin',
 f'{$HOME}/local/bin',
 f'{$HOME}/.local/bin',
+f'{$HOME}/.nvm/versions/node/{$NVM_NODE_VERSION}/bin'
 ]
 
 for dir in $user_bins:
